@@ -1,27 +1,35 @@
 import 'package:storeapp/models/rating_model.dart';
 
 class ProductModel {
-  final int id;
-  final String image, description, title;
-  final double price;
-  final RatingModel ratingModel;
-
+  final dynamic id;
+  final String title;
+  final dynamic price;
+  final String description;
+  final String image;
+  final RatingModel? rating;
+  final String category;
   ProductModel({
     required this.id,
     required this.title,
+    required this.category,
+    required this.price,
     required this.description,
     required this.image,
-    required this.price,
-    required this.ratingModel,
+    required this.rating,
   });
-  factory ProductModel.fromJson(json) {
+
+  factory ProductModel.fromJson(jsonData) {
     return ProductModel(
-      id: json["id"],
-      title: json["title"],
-      description: json["description"],
-      image: json["image"],
-      price: json["price"],
-      ratingModel: RatingModel.fromJson("rating"),
+      id: jsonData['id'],
+      title: jsonData['title'],
+      category: jsonData['category'],
+      price: jsonData['price'],
+      description: jsonData['description'],
+      image: jsonData['image'],
+      rating:
+          jsonData['rating'] == null
+              ? null
+              : RatingModel.fromJson(jsonData['rating']),
     );
   }
 }
